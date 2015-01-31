@@ -1,0 +1,15 @@
+---
+- name: Install common packages (utilities)
+  apt: name={{ item }} state=latest
+  with_items:
+    - ntp 
+    - git 
+    - openjdk-7-jdk 
+    - default-jdk 
+    - curl 
+    - htop
+    - unzip 
+
+- name: Select Java 7 as default JDK
+  alternatives: name=java path=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+

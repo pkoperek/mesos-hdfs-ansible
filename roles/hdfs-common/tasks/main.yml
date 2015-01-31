@@ -1,0 +1,27 @@
+---
+- name: Get list of HortonWorks repos
+  get_url: url=http://public-repo-1.hortonworks.com/HDP/ubuntu12/2.x/GA/2.2.0.0/hdp.list dest=/etc/apt/sources.list.d/hdp.list
+
+- name: Install HortonWorks keys
+  apt_key: keyserver=pgp.mit.edu id=B9733A7A07513CAD state=present
+
+- name: Upgrade distribution
+  apt: update_cache=yes upgrade=yes
+
+- name: Install required hadoop packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - python-setuptools 
+    - python-protobuf 
+    - libsnappy1 
+    - libsnappy-dev 
+    - hadoop 
+    - hadoop-hdfs 
+    - libhdfs0 
+    - hadoop-yarn 
+    - hadoop-mapreduce 
+    - hadoop-client 
+    - jsvc
+
+- name: Create /mnt/data
+  file: path=/mnt/data state=directory owner=hdfs group=hdfs

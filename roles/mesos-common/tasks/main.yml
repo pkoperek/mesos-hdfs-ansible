@@ -1,0 +1,10 @@
+---
+- name: Mesos repository key 
+  apt_key: keyserver=keyserver.ubuntu.com id=E56151BF state=present
+
+- name: Mesos repository
+  apt_repository: repo='deb http://repos.mesosphere.io/ubuntu trusty main'
+
+- name: Install mesos
+  apt: name=mesos state=latest
+
