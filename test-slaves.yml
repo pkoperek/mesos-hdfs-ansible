@@ -1,6 +1,11 @@
 ---
 - hosts: slaves
+  vars_files:
+  - vars/hdfs.yml
 
   roles:
-  - mesos-slave
+  - common
+  - hdfs-common
   - hdfs-datanode
+  - mesos-common
+  - mesos-slave
