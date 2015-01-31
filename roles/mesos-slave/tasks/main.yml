@@ -1,0 +1,9 @@
+---
+- name: Remove mesos-master configuration
+  file: path=/etc/init/mesos-master.conf state=absent
+
+- name: Mesos executor timeout
+  template: dest=/etc/mesos-slave/executor_registration_timeout src=../templates/executor_registration_timeout
+
+- name: Setup mesos-slave IP address
+  template: backup=yes src=../templates/mesos-slave dest=/etc/default/mesos-slave

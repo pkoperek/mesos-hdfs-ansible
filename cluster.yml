@@ -1,15 +1,23 @@
 ---
-
 - hosts: master
+  vars_files:
+  - vars/nibbler-tests.yml
 
   roles:
-  - mesos-master
+  - common
+  - hdfs-common
   - hdfs-namenode
+  - mesos-common
+  - zookeeper
+  - mesos-master
   - nibbler
-
+  - nibbler-tests
 
 - hosts: slaves
 
   roles:
+  - common
+  - hdfs-common
+  - mesos-common
   - mesos-slave
   - hdfs-datanode

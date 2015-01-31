@@ -5,11 +5,8 @@
 - name: Install HortonWorks keys
   apt_key: keyserver=pgp.mit.edu id=B9733A7A07513CAD state=present
 
-- name: Upgrade distribution
-  apt: update_cache=yes upgrade=yes
-
 - name: Install required hadoop packages
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} state=latest update_cache=yes
   with_items:
     - python-setuptools 
     - python-protobuf 
@@ -25,3 +22,12 @@
 
 - name: Create /mnt/data
   file: path=/mnt/data state=directory owner=hdfs group=hdfs
+
+- name: Configure core-site.xml
+  template: backup=yes src=../templates/core-site.xml dest=/etc/hadoop/conf/core-site.xml
+
+- name: Configure hdfs-site.xml
+  template: backup=yes src=../templates/hdfs-site.xml dest=/etc/hadoop/conf/hdfs-site.xml
+
+- name: Configure hadoop-env.sh
+  template: backup=yes src=../templates/hadoop-env.sh dest=/etc/hadoop/conf/hadoop-env.sh

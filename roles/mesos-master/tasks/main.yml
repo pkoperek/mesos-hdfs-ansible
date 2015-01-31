@@ -1,0 +1,6 @@
+---
+- name: Remove mesos-slave configuration
+  file: path=/etc/init/mesos-slave.conf state=absent
+
+- name: Setup mesos-master IP address
+  template: backup=yes src=../templates/mesos-master dest=/etc/default/mesos-master

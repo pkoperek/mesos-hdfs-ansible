@@ -1,0 +1,12 @@
+---
+- name: Schedule HDFS namenode startup
+  copy: backup=yes src=../templates/rc.local.namenode dest=/etc/rc.local mode=0755
+
+- name: Create HDFS namenode directory
+  file: path={{ hdfs_namenode_directory }} state=directory owner=hdfs group=hdfs
+
+- name: Initialize HDFS 
+  shell: hadoop namenode -format
+  sudo: yes
+  sudo_user: hdfs
+  

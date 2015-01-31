@@ -6,5 +6,5 @@
   apt_repository: repo='deb http://repos.mesosphere.io/ubuntu trusty main'
 
 - name: Install mesos
-  apt: name=mesos state=latest
+  apt: name=mesos state=latest update_cache=yes
 

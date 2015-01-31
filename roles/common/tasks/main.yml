@@ -11,5 +11,8 @@
     - unzip 
 
 - name: Select Java 7 as default JDK
-  alternatives: name=java path=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+  alternatives: name=java path=/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre/bin/java
+
+- name: Upgrade distribution
+  apt: update_cache=yes upgrade=yes
 

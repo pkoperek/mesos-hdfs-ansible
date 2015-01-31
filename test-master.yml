@@ -8,6 +8,7 @@
   - hdfs-common
   - hdfs-namenode
   - mesos-common
+  - zookeeper
   - mesos-master
   - nibbler
   - nibbler-tests
