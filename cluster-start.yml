@@ -1,0 +1,81 @@
+---
+- name: Start cluster
+  hosts: localhost
+  connection: local
+  gather_facts: False 
+  vars_files:
+  - vars/ec2.yml
+
+  tasks:
+  - name: Start master
+    ec2:
+      key_name: {{ ec2_key_name }}
+      group: default
+      instance_type: {{ ec2_master_instance_type }}
+      image: {{ ec2_master_image }}
+      assign_public_ip: yes  
+      instance_tags:
+        type: master
+      count_tag: 
+        type: master
+      exact_count: 1
+      wait: true
+    register: ec2_master
+
+  - name: Wait for SSH to come up
+    wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=320 state=started
+    with_items: ec2_master.instances
+
+  - name: Add VM to master group
+    add_host: hostname={{ item.public_dns_name }} groupname=master
+    with_items: ec2_master.instances
+
+  - name: Provision master
+    hosts: master
+    vars_files:
+    - vars/nibbler-tests.yml
+    - vars/hdfs.yml
+
+    roles:
+    - common
+    - hdfs-common
+    - hdfs-namenode
+    - mesos-common
+    - zookeeper
+    - mesos-master
+    - nibbler
+
+  - name: Start slaves
+    ec2:
+      key_name: {{ ec2_key_name }}
+      group: default
+      instance_type: {{ ec2_slave_instance_type }}
+      image: {{ ec2_slave_image }}
+      assign_public_ip: yes
+      instance_tags:
+        type: slave
+      count_tag:
+        type: slave
+      exact_count: {{ ec2_slaves_count }}
+      wait: true
+    register: ec2_slaves
+
+  - name: Wait for SSH to come up
+    wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=320 state=started
+    with_items: ec2_slaves.instances
+
+  - name: Add VMs to slave group
+    add_host: hostname={{ item.public_dns_name }} groupname=slaves
+    with_items: ec2_slaves.instances
+
+  - name: Provision slaves
+    hosts: slaves
+    vars_files:
+    - vars/hdfs.yml
+
+    roles:
+    - common
+    - hdfs-common
+    - hdfs-datanode
+    - mesos-common
+    - mesos-slave
