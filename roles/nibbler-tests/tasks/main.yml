@@ -1,0 +1,29 @@
+---
+- name: Create directory for tests
+  file: path=/mnt/nibbler-tests state=directory
+
+- name: Clone nibbler-tests repo
+  git: repo=https://github.com/pkoperek/nibbler-tests.git dest=/mnt/nibbler-tests
+
+- name: Unpack data 
+  shell: bunzip2 *bz2
+  args:
+    chdir: /mnt/nibbler-tests/datasets
+
+- name: Change ownership to ubuntu:ubuntu
+  file: path=/mnt/nibbler-tests group=ubuntu owner=ubuntu recurse=yes
+
+- name: Create datasets directory in HDFS
+  shell: hdfs dfs -mkdir -p {{ hdfs_datasets_directory }} 
+  sudo: yes
+  sudo_user: hdfs
+
+- name: Upload test data to HDFS
+  shell: hdfs dfs -put /mnt/nibbler-tests/datasets/*txt {{ hdfs_datasets_directory }}
+  sudo: yes
+  sudo_user: hdfs
+
+- name: Make ubuntu the datasets directory owner
+  shell: hdfs dfs -chown -R ubuntu:ubuntu {{ hdfs_datasets_directory }}
+  sudo: yes
+  sudo_user: hdfs
