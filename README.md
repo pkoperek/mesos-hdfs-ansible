@@ -8,9 +8,8 @@ testing changes
 
 ```
 vagrant up
-vagrant ssh
-sudo apt-get install python-pip python-jinja2
-sudo pip install ansible
+vagrant ssh master (or slave)
 cd /vagrant
 ansible-playbook -i test-hosts test-master.yml -s --extra-vars "master_hostname=vagrant"
+ansible-playbook -i test-hosts test-slaves.yml -s --extra-vars "master_hostname=vagrant"
 ```
