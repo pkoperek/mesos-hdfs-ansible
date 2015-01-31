@@ -6,7 +6,7 @@
   file: path={{ hdfs_namenode_directory }} state=directory owner=hdfs group=hdfs
 
 - name: Initialize HDFS 
-  shell: hadoop namenode -format
+  shell: hadoop namenode -format -force
   sudo: yes
   sudo_user: hdfs
   
