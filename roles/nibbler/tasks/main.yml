@@ -1,0 +1,9 @@
+---
+- name: Create directory for nibbler
+  file: path=/mnt/nibbler state=directory
+
+- name: Clone nibbler repo
+  git: repo=https://github.com/pkoperek/nibbler.git dest=/mnt/nibbler
+
+- name: Change ownership to ubuntu:ubuntu
+  file: path=/mnt/nibbler group=ubuntu owner=ubuntu recurse=yes
