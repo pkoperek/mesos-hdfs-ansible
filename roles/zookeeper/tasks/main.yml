@@ -3,7 +3,7 @@
   apt: name=zookeeper
   
 - name: Link init script
-  file: src=/usr/hdp/current/zookeeper/bin/zookeeper-server dest=/etc/init.d/zookeeper-server state=link
+  file: src=/usr/hdp/{{ hdp_version }}/zookeeper/bin/zookeeper-server dest=/etc/init.d/zookeeper-server state=link
 
 - name: Autostart zookeeper 
   shell: update-rc.d zookeeper-server defaults

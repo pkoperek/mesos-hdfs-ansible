@@ -2,6 +2,7 @@
 - hosts: master
   vars_files:
   - vars/nibbler-tests.yml
+  - vars/hdfs.yml
 
   roles:
   - common

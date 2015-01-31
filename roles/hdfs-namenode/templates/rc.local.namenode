@@ -1,2 +1,2 @@
 #!/bin/sh -e
-sudo /usr/hdp/current/hadoop/sbin/hadoop-daemon.sh start namenode
+sudo /usr/hdp/{{ hdp_version }}/hadoop/sbin/hadoop-daemon.sh start namenode
