@@ -1,0 +1,6 @@
+---
+- hosts: slaves
+
+  roles:
+  - mesos-slave
+  - hdfs-datanode
