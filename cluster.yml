@@ -1,0 +1,15 @@
+---
+
+- hosts: master
+
+  roles:
+  - mesos-master
+  - hdfs-namenode
+  - nibbler
+
+
+- hosts: slaves
+
+  roles:
+  - mesos-slave
+  - hdfs-datanode
