@@ -1,0 +1,3 @@
+---
+- name: Schedule HDFS datanode startup
+  template: backup=yes src=../templates/rc.local.datanode dest=/etc/rc.local mode=0755
