@@ -1,2 +1,4 @@
 ---
 hdp_version: 2.2.0.0-2041
+hdfs_datasets_directory: /datasets
+hdfs_namenode_directory: /hdfs

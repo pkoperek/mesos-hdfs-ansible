@@ -4,7 +4,6 @@
   remote_user: ubuntu
   sudo: true
   vars_files:
-  - vars/nibbler-tests.yml
   - vars/hdfs.yml
 
   roles:
@@ -68,7 +67,7 @@
 - name: Provision tests on master
   hosts: master
   vars_files:
-  - vars/nibbler-tests.yml
+  - vars/hdfs.yml
 
   roles:
   - nibbler-tests
