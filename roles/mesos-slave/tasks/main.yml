@@ -5,5 +5,8 @@
 - name: Mesos executor timeout
   template: dest=/etc/mesos-slave/executor_registration_timeout src=../templates/executor_registration_timeout
 
+- name: Mesos zookeeper URI
+  template: dest=/etc/mesos/zk src=../templates/zk
+
 - name: Setup mesos-slave IP address
   template: backup=yes src=../templates/mesos-slave dest=/etc/default/mesos-slave
