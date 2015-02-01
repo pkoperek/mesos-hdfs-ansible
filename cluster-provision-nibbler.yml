@@ -1,6 +1,8 @@
 ---
 - name: Provision nibbler and tests on master
   hosts: tag_type_master
+  remote_user: ubuntu
+  sudo: true
   vars_files:
   - vars/hdfs.yml
 
