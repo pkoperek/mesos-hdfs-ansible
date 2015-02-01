@@ -1,0 +1,10 @@
+---
+- name: Provision nibbler and tests on master
+  hosts: tag_type_master
+  vars_files:
+  - vars/hdfs.yml
+
+  roles:
+  - nibbler
+  - nibbler-tests
+
