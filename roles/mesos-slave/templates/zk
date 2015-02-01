@@ -1,1 +1,1 @@
-zk://{{ master_hostname }}:2181/mesos
+zk://{{ hostvars[groups['tag_type_master'][0]]['ansible_hostname'] }}:2181/mesos

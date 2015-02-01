@@ -73,7 +73,7 @@
   </property>
     <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://{{ master_hostname }}:8020</value>
+    <value>hdfs://{{ hostvars[groups['tag_type_master'][0]]['ansible_hostname'] }}:8020</value>
   </property>
     <property>
     <name>mapreduce.jobtracker.webinterface.trusted</name>

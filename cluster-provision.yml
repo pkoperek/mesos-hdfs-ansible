@@ -1,6 +1,7 @@
 ---
 - name: Provision master
   hosts: tag_type_master 
+  remote_user: ubuntu
   sudo: true
   vars_files:
   - vars/nibbler-tests.yml
@@ -17,6 +18,7 @@
 
 - name: Restart master
   hosts: tag_type_master
+  remote_user: ubuntu
   sudo: true
   tasks:
   - command: shutdown -r now "Ansible updates triggered"
@@ -27,13 +29,13 @@
 - name: Waiting for master to come back
   hosts: localhost
   tasks:
-  - local_action: wait_for host={{ item.public_dns_name }}
-                  state=started
+  - local_action: wait_for host={{ hostvars[groups['tag_type_master'][0]].ec2_public_dns_name }}
+                  state=started port=22
     sudo: false
-    with_items: tag_type_master
 
 - name: Provision slaves
   sudo: true
+  remote_user: ubuntu
   hosts: tag_type_slave
   vars_files:
   - vars/hdfs.yml
@@ -47,6 +49,7 @@
 
 - name: Restart slaves
   hosts: tag_type_slave
+  remote_user: ubuntu
   sudo: true
   tasks:
   - command: shutdown -r now "Ansible updates triggered"
@@ -57,10 +60,10 @@
 - name: Waiting for slaves to come back
   hosts: localhost
   tasks: 
-  - local_action: wait_for host={{ item.public_dns_name }}
-                  state=started
+  - local_action: wait_for host={{ item.ec2_public_dns_name }}
+                  state=started port=22
     sudo: false
-    with_items: tag_type_slave
+    with_items: groups['tag_type_slave']
 
 - name: Provision tests on master
   hosts: master

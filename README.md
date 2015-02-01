@@ -19,5 +19,5 @@ Running
 
 ```
 ansible-playbook -i hosts cluster-start.yml 
-ansible-playbook -i ec2.py cluster-provision.yml -u ubuntu
+ansible-playbook -i ec2.py cluster-provision.yml 
 ```

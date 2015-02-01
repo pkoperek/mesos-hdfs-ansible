@@ -38,7 +38,7 @@
   </property>
     <property>
     <name>dfs.namenode.http-address</name>
-    <value>{{ master_hostname }}:50070</value>
+    <value>{{ hostvars[groups['tag_type_master'][0]]['ansible_hostname'] }}:50070</value>
   </property>
     <property>
     <name>dfs.client.read.shortcircuit.streams.cache.size</name>
