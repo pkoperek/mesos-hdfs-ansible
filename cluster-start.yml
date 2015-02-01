@@ -18,8 +18,10 @@
       region: "{{ ec2_region }}"
       instance_tags:
         type: master
+        cluster: "{{ ec2_cluster_name }}"
       count_tag: 
         type: master
+        cluster: "{{ ec2_cluster_name }}"
       exact_count: 1
       wait: true
     register: ec2_master
@@ -43,8 +45,10 @@
       region: "{{ ec2_region }}"
       instance_tags:
         type: slave
+        cluster: "{{ ec2_cluster_name }}"
       count_tag:
         type: slave
+        cluster: "{{ ec2_cluster_name }}"
       exact_count: "{{ ec2_slaves_count }}"
       wait: true
     register: ec2_slaves
