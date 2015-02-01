@@ -1,0 +1,72 @@
+---
+- name: Provision master
+  hosts: tag_type_master 
+  sudo: true
+  vars_files:
+  - vars/nibbler-tests.yml
+  - vars/hdfs.yml
+
+  roles:
+  - common
+  - hdfs-common
+  - hdfs-namenode
+  - mesos-common
+  - zookeeper
+  - mesos-master
+  - nibbler
+
+- name: Restart master
+  hosts: tag_type_master
+  sudo: true
+  tasks:
+  - command: shutdown -r now "Ansible updates triggered"
+    async: 0
+    poll: 0
+    ignore_errors: true
+
+- name: Waiting for master to come back
+  hosts: localhost
+  tasks:
+  - local_action: wait_for host={{ item.public_dns_name }}
+                  state=started
+    sudo: false
+    with_items: tag_type_master
+
+- name: Provision slaves
+  sudo: true
+  hosts: tag_type_slave
+  vars_files:
+  - vars/hdfs.yml
+
+  roles:
+  - common
+  - hdfs-common
+  - hdfs-datanode
+  - mesos-common
+  - mesos-slave
+
+- name: Restart slaves
+  hosts: tag_type_slave
+  sudo: true
+  tasks:
+  - command: shutdown -r now "Ansible updates triggered"
+    async: 0
+    poll: 0
+    ignore_errors: true
+
+- name: Waiting for slaves to come back
+  hosts: localhost
+  tasks: 
+  - local_action: wait_for host={{ item.public_dns_name }}
+                  state=started
+    sudo: false
+    with_items: tag_type_slave
+
+- name: Provision tests on master
+  hosts: master
+  vars_files:
+  - vars/nibbler-tests.yml
+
+  roles:
+  - nibbler-tests
+

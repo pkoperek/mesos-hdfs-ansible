@@ -13,3 +13,11 @@ cd /vagrant
 ansible-playbook -i test-hosts test-master.yml -s --extra-vars "master_hostname=vagrant"
 ansible-playbook -i test-hosts test-slaves.yml -s --extra-vars "master_hostname=vagrant"
 ```
+
+Running
+=======
+
+```
+ansible-playbook -i hosts cluster-start.yml 
+ansible-playbook -i ec2.py cluster-provision.yml -u ubuntu
+```

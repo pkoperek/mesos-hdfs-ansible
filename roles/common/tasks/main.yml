@@ -1,6 +1,9 @@
 ---
+- name: Upgrade distribution
+  apt: update_cache=yes upgrade=yes
+
 - name: Install common packages (utilities)
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} state=latest 
   with_items:
     - ntp 
     - git 
@@ -12,7 +15,4 @@
 
 - name: Select Java 7 as default JDK
   alternatives: name=java path=/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre/bin/java
-
-- name: Upgrade distribution
-  apt: update_cache=yes upgrade=yes
 

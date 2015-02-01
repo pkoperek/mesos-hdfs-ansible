@@ -1,8 +1,9 @@
 ---
-ec2_key: basic
+ec2_key_name: basic
 ec2_master_instance_type: m1.medium
 ec2_slave_instance_type: m1.medium
 ec2_master_image: ami-b99ed989 
 ec2_slave_image: ami-b99ed989
 ec2_slaves_count: 3
-
+ec2_region: us-west-2
+ec2_vpc_subnet_id: subnet-3f00df5a
