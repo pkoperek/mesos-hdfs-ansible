@@ -1,2 +1,2 @@
 #!/bin/sh -e
-sudo /usr/hdp/{{ hdp_version }}/hadoop/sbin/hadoop-daemon.sh start datanode
+sudo -u hdfs /usr/hdp/{{ hdp_version }}/hadoop/sbin/hadoop-daemon.sh start datanode

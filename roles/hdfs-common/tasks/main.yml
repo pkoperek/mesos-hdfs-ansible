@@ -21,6 +21,7 @@
     - jsvc
 
 - name: Create /mnt/data
+  file: path=/mnt/data state=absent
   file: path=/mnt/data state=directory owner=hdfs group=hdfs
 
 - name: Configure core-site.xml
