@@ -20,8 +20,10 @@
     - hadoop-client 
     - jsvc
 
-- name: Create /mnt/data
+- name: Remove /mnt/data
   file: path=/mnt/data state=absent
+
+- name: Recreate /mnt/data
   file: path=/mnt/data state=directory owner=hdfs group=hdfs
 
 - name: Configure core-site.xml

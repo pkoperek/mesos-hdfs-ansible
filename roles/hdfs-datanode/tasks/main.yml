@@ -1,3 +1,6 @@
 ---
 - name: Schedule HDFS datanode startup
   template: backup=yes src=../templates/rc.local.datanode dest=/etc/rc.local mode=0755
+
+- name: Set root as owner of /var/lib/hadoop-hdfs
+  file: path=/var/lib/hadoop-hdfs owner=root state=directory
