@@ -5,8 +5,11 @@
 - name: Mesos executor timeout
   template: dest=/etc/mesos-slave/executor_registration_timeout src=../templates/executor_registration_timeout
 
+- name: Remove default zk configuration
+  file: path=/etc/mesos/zk state=absent
+
 - name: Mesos zookeeper URI
-  template: dest=/etc/mesos/zk src=../templates/zk
+  lineinfile: dest=/etc/mesos/default line="MASTER=zk://{{ hostvars[groups['tag_type_master'][0]]['ansible_hostname'] }}:2181/mesos" state="present" regexp="MASTER=(.*)"
 
 - name: Setup mesos-slave IP address
   template: backup=yes src=../templates/mesos-slave dest=/etc/default/mesos-slave

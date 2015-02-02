@@ -4,3 +4,7 @@
 
 - name: Setup mesos-master IP address
   template: backup=yes src=../templates/mesos-master dest=/etc/default/mesos-master
+
+- name: Register in zookeeper
+  lineinfile: dest=/etc/default/mesos regexp="ZK=(.*)" state="absent"
+  lineinfile: dest=/etc/default/mesos line="ZK=zk://localhost:2181/mesos" state="present"
