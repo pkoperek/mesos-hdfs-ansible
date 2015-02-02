@@ -13,6 +13,16 @@
 - name: Change ownership to ubuntu:ubuntu
   file: path=/mnt/nibbler-tests group=ubuntu owner=ubuntu recurse=yes
 
+- name: Create /tmp directory in HDFS
+  shell: hdfs dfs -mkdir -p /tmp
+  sudo: yes
+  sudo_user: hdfs
+
+- name: Make ubuntu the /tmp directory owner
+  shell: hdfs dfs -chown -R ubuntu:ubuntu {{ hdfs_datasets_directory }}
+  sudo: yes
+  sudo_user: hdfs
+
 - name: Create datasets directory in HDFS
   shell: hdfs dfs -mkdir -p {{ hdfs_datasets_directory }} 
   sudo: yes
