@@ -22,3 +22,11 @@ ansible-playbook -i hosts cluster-start.yml
 ansible-playbook -i ec2.py cluster-provision.yml 
 ansible-playbook -i ec2.py cluster-provision-nibbler.yml 
 ```
+
+TODO:
+=====
+
+  * Make nibbler-tests indempotent
+  * cluster stopping
+  * support for multiple clusters 
+  * proper interaction between spark/mesos
