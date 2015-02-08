@@ -41,7 +41,8 @@ Ansible configuration:
     ```
 
   * Create directory `/etc/ansible/inventory`
-  * Copy `hosts` and `ec2.py` and `ec2.ini` to `/etc/ansible/inventory`
+  * Copy `hosts` and `ec2.py` to `/etc/ansible/inventory`
+  * Copy `ec2.ini` to `/etc/ansible`
 
 TODO:
 =====
