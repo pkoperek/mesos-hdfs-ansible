@@ -26,23 +26,9 @@ ansible-playbook cluster-provision-nibbler.yml
 Ansible configuration:
 ======================
 
-  * In `/etc/ansible/ansible.cfg` change:
-
-    ```
-    [defaults]
-    hostfile       = /etc/ansible/hosts
-    ```
-
-    to 
-
-    ```
-    [defaults]
-    hostfile       = /etc/ansible/inventory
-    ```
-
-  * Create directory `/etc/ansible/inventory`
-  * Copy `hosts` and `ec2.py` to `/etc/ansible/inventory`
-  * Copy `ec2.ini` to `/etc/ansible`
+  * Create directory `/etc/ansible/hosts
+  * Copy `hosts` and `ec2.py` to `/etc/ansible/hosts`
+  * Copy `ec2.ini` to `/etc/ansible/hosts`
 
 TODO:
 =====
