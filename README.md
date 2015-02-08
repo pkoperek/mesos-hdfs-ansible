@@ -18,7 +18,27 @@ Running
 =======
 
 ```
-ansible-playbook -i hosts cluster-start.yml 
-ansible-playbook -i ec2.py cluster-provision.yml 
-ansible-playbook -i ec2.py cluster-provision-nibbler.yml 
+ansible-playbook cluster-start.yml 
+ansible-playbook cluster-provision.yml 
+ansible-playbook cluster-provision-nibbler.yml 
 ```
+
+Ansible configuration:
+======================
+
+  * In `/etc/ansible/ansible.cfg` change:
+
+    ```
+    [defaults]
+    hostfile       = /etc/ansible/hosts
+    ```
+
+    to 
+
+    ```
+    [defaults]
+    hostfile       = /etc/ansible/inventory
+    ```
+
+  * Create directory `/etc/ansible/inventory`
+  * Copy `hosts` and `ec2.py` and `ec2.ini` to `/etc/ansible/inventory`
