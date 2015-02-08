@@ -19,7 +19,7 @@
   sudo_user: hdfs
 
 - name: Make ubuntu the /tmp directory owner
-  shell: hdfs dfs -chown -R ubuntu:ubuntu {{ hdfs_datasets_directory }}
+  shell: hdfs dfs -chown -R ubuntu:ubuntu /tmp
   sudo: yes
   sudo_user: hdfs
 

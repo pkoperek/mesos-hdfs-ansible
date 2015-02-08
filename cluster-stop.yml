@@ -1,0 +1,16 @@
+---
+- hosts: ec2
+  gather_facts: True
+  remote_user: ubuntu
+  vars_files:
+  - vars/ec2.yml
+  tasks:
+  - local_action: ec2_facts
+  - name: Terminate instance
+    local_action: 
+      ec2 
+        state="absent" 
+        instance_ids="{{ ec2_id }}" 
+        wait=true
+        region="{{ ec2_region }}"
+    when: ec2_tag_cluster == "{{ ec2_cluster_name }}"

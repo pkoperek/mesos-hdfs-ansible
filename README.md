@@ -42,3 +42,11 @@ Ansible configuration:
 
   * Create directory `/etc/ansible/inventory`
   * Copy `hosts` and `ec2.py` and `ec2.ini` to `/etc/ansible/inventory`
+
+TODO:
+=====
+
+  * Make nibbler-tests indempotent
+  * cluster stopping
+  * support for multiple clusters 
+  * proper interaction between spark/mesos
