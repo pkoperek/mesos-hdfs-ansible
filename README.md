@@ -26,7 +26,7 @@ ansible-playbook cluster-provision-nibbler.yml
 Ansible configuration:
 ======================
 
-  * Create directory `/etc/ansible/hosts
+  * Create directory `/etc/ansible/hosts`
   * Copy `hosts` and `ec2.py` to `/etc/ansible/hosts`
   * Copy `ec2.ini` to `/etc/ansible/hosts`
 
@@ -37,3 +37,4 @@ TODO:
   * cluster stopping
   * support for multiple clusters 
   * proper interaction between spark/mesos
+  * spot instances support (add tags to instances created for spot requests)
