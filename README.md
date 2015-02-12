@@ -37,4 +37,4 @@ TODO:
   * cluster stopping
   * support for multiple clusters 
   * proper interaction between spark/mesos
-  * spot instances support (add tags to instances created for spot requests)
+  * ~~spot instances support (add tags to instances created for spot requests)~~ - works with latest ansible (as per https://github.com/ansible/ansible-modules-core/issues/423)
