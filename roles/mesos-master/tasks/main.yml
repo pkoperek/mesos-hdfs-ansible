@@ -1,6 +1,9 @@
 ---
-- name: Remove mesos-slave configuration
-  file: path=/etc/init/mesos-slave.conf state=absent
+- name: Disable mesos slave - override init file
+  file: path=/etc/init/mesos-slave.override state=file
+
+- name: Disable mesos slave - manual line
+  lineinfile: dest=/etc/init/mesos-slave.override line="manual" state="present"
 
 - name: Setup mesos-master IP address
   template: backup=yes src=../templates/mesos-master dest=/etc/default/mesos-master

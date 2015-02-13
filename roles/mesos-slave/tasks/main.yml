@@ -1,6 +1,9 @@
 ---
-- name: Remove mesos-master configuration
-  file: path=/etc/init/mesos-master.conf state=absent
+- name: Disable mesos master - override master init file
+  file: path=/etc/init/mesos-master.override state=file
+
+- name: Disable mesos master - manual line
+  lineinfile: dest=/etc/init/mesos-master.override line="manual" state="present"
 
 - name: Mesos executor timeout
   template: dest=/etc/mesos-slave/executor_registration_timeout src=../templates/executor_registration_timeout
