@@ -1,6 +1,6 @@
 ---
 - name: Disable mesos slave - override init file
-  file: path=/etc/init/mesos-slave.override state=file
+  file: path=/etc/init/mesos-slave.override state=touch
 
 - name: Disable mesos slave - manual line
   lineinfile: dest=/etc/init/mesos-slave.override line="manual" state="present"

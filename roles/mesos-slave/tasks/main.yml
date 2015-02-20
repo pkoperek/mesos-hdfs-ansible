@@ -1,6 +1,6 @@
 ---
 - name: Disable mesos master - override master init file
-  file: path=/etc/init/mesos-master.override state=file
+  file: path=/etc/init/mesos-master.override state=touch
 
 - name: Disable mesos master - manual line
   lineinfile: dest=/etc/init/mesos-master.override line="manual" state="present"
